@@ -1,7 +1,11 @@
+'use client'
+
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Search, Home, ArrowLeft } from 'lucide-react'
 
 export default function NotFound() {
+  const router = useRouter()
   return (
     <div className="container-kbo py-24 text-center">
       <div className="max-w-md mx-auto">
@@ -21,10 +25,10 @@ export default function NotFound() {
             Zoeken
           </Link>
         </div>
-        <Link href="javascript:history.back()" className="btn-ghost mt-4 inline-flex">
+        <button onClick={() => router.back()} className="btn-ghost mt-4 inline-flex">
           <ArrowLeft className="w-4 h-4" />
           Terug
-        </Link>
+        </button>
       </div>
     </div>
   )

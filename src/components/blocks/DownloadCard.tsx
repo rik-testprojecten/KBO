@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Download, FileText, FileSpreadsheet, FilePresentation, File } from 'lucide-react'
+import { Download, FileText, FileSpreadsheet, Presentation, File } from 'lucide-react'
 import { formatDate } from '@/lib/utils'
 import type { Template } from '@/types/content'
 
@@ -9,8 +9,8 @@ const FILE_ICONS: Record<string, React.ReactNode> = {
   xls:  <FileSpreadsheet className="w-6 h-6 text-green-600" />,
   docx: <FileText className="w-6 h-6 text-blue-600" />,
   doc:  <FileText className="w-6 h-6 text-blue-600" />,
-  pptx: <FilePresentation className="w-6 h-6 text-orange-500" />,
-  ppt:  <FilePresentation className="w-6 h-6 text-orange-500" />,
+  pptx: <Presentation className="w-6 h-6 text-orange-500" />,
+  ppt:  <Presentation className="w-6 h-6 text-orange-500" />,
 }
 
 function fileIcon(type?: string) {

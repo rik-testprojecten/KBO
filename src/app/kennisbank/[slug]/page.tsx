@@ -9,11 +9,12 @@ import { formatDate, DOELGROEP_LABELS } from '@/lib/utils'
 import type { Doelgroep } from '@/types/content'
 
 interface Props {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const artikel = DUMMY_ARTIKELEN.find((a) => a.slug === params.slug)
+  const { slug } = await params
+  const artikel = DUMMY_ARTIKELEN.find((a) => a.slug === slug)
   if (!artikel) return { title: 'Niet gevonden' }
   return {
     title: artikel.titel,
@@ -26,8 +27,9 @@ export function generateStaticParams() {
   return DUMMY_ARTIKELEN.map((a) => ({ slug: a.slug }))
 }
 
-export default function ArtikelDetailPage({ params }: Props) {
-  const artikel = DUMMY_ARTIKELEN.find((a) => a.slug === params.slug)
+export default async function ArtikelDetailPage({ params }: Props) {
+  const { slug } = await params
+  const artikel = DUMMY_ARTIKELEN.find((a) => a.slug === slug)
   if (!artikel) notFound()
 
   const gerelateerd = DUMMY_ARTIKELEN.filter(
@@ -56,7 +58,7 @@ export default function ArtikelDetailPage({ params }: Props) {
               {artikel.reviewStatus === 'ok' && (
                 <span className="badge bg-green-100 text-green-700 gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"></span>
-                  Actueel & gereviewed
+                  Actueel &amp; gereviewed
                 </span>
               )}
             </div>
@@ -163,7 +165,6 @@ export default function ArtikelDetailPage({ params }: Props) {
 
           {/* Sidebar */}
           <aside className="space-y-6">
-            {/* Gerelateerd */}
             {gerelateerd.length > 0 && (
               <div className="card p-5">
                 <h2 className="text-base font-bold text-kbo-blue mb-3">Gerelateerde publicaties</h2>
@@ -175,7 +176,6 @@ export default function ArtikelDetailPage({ params }: Props) {
               </div>
             )}
 
-            {/* Thema's */}
             <div className="card p-5">
               <h2 className="text-base font-bold text-kbo-blue mb-3">Thema&apos;s</h2>
               <div className="flex flex-col gap-2">
@@ -192,7 +192,6 @@ export default function ArtikelDetailPage({ params }: Props) {
               </div>
             </div>
 
-            {/* Back */}
             <Link href="/kennisbank" className="btn-secondary w-full justify-center text-sm">
               ← Terug naar kennisbank
             </Link>
