@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    --color-primary: #154273;
+    --color-secondary: #007BC7;
+    --color-accent: #F9A800;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply font-sans text-gray-800 bg-white antialiased;
+  }
+
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-kbo-teal rounded;
+  }
+
+  h1 { @apply text-3xl font-bold text-kbo-blue leading-tight; }
+  h2 { @apply text-2xl font-bold text-kbo-blue leading-tight; }
+  h3 { @apply text-xl font-semibold text-kbo-blue leading-snug; }
+  h4 { @apply text-lg font-semibold text-kbo-blue; }
+}
+
+@layer components {
+  .container-kbo {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 bg-kbo-teal text-white font-semibold rounded-lg
+           hover:bg-kbo-teal-hover transition-colors duration-150
+           focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kbo-teal
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 bg-white text-kbo-blue font-semibold rounded-lg border-2 border-kbo-blue
+           hover:bg-kbo-blue-light transition-colors duration-150;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-4 py-2 text-kbo-teal font-medium rounded-lg
+           hover:bg-kbo-teal-light transition-colors duration-150;
+  }
+
+  .card {
+    @apply bg-white rounded-xl border border-kbo-gray-border shadow-card hover:shadow-card-hover
+           transition-shadow duration-200;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-blue   { @apply badge bg-kbo-blue-light text-kbo-blue; }
+  .badge-teal   { @apply badge bg-kbo-teal-light text-kbo-teal; }
+  .badge-gold   { @apply badge bg-kbo-gold-light text-amber-700; }
+  .badge-red    { @apply badge bg-kbo-red-light text-kbo-red; }
+  .badge-gray   { @apply badge bg-kbo-gray-light text-kbo-gray; }
+
+  .section-title {
+    @apply text-2xl font-bold text-kbo-blue mb-2;
+  }
+
+  .section-subtitle {
+    @apply text-kbo-gray text-base mb-8;
+  }
+
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50
+           focus:px-4 focus:py-2 focus:bg-kbo-blue focus:text-white focus:rounded-lg;
+  }
+
+  .prose-kbo {
+    @apply prose max-w-none
+           prose-headings:text-kbo-blue
+           prose-a:text-kbo-teal prose-a:no-underline hover:prose-a:underline
+           prose-strong:text-kbo-blue
+           prose-code:bg-kbo-gray-light prose-code:px-1 prose-code:rounded;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
